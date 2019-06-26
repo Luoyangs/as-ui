@@ -1,0 +1,42 @@
+{
+  "compilerOptions": {
+    "target": "es6",
+    "module": "esnext",
+    "jsx": "preserve",
+    "allowJs": true,
+    "noImplicitAny": true,
+    "inlineSourceMap": false,
+    "importHelpers": true,
+    "preserveSymlinks": true,
+    "experimentalDecorators": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "sourceMap": true,
+    "moduleResolution": "node",
+    "baseUrl": ".",
+    "types": [
+      "webpack-env"
+    ],
+    "paths": {
+      "@src/*": [
+        "src/*"
+      ],
+      "as-ui/*": [
+        "packages/*"
+      ]
+    },
+    "lib": [
+      "esnext",
+      "dom",
+      "dom.iterable",
+      "scripthost"
+    ]
+  },
+  "exclude": [
+    "node_modules",
+    "build",
+    "config",
+    "lib",
+    "*.config.js",
+  ]
+}
