@@ -11,10 +11,11 @@ export const componentsRouterConfig = [
   {
     path: '/testbat',
     name: 'testbat',
-    component: () => import(/* webpackChunkName: "testbat" */ './components/testbat.vue')
+    component: () => import(/* webpackChunkName: "input" */ './docs/input.md')
   }
 ];
 
 export default new Router({
+  mode: 'hash',
   routes: componentsRouterConfig
 });

@@ -1,7 +1,7 @@
 declare module 'as-ui' {
-  import Testbat from 'as-ui/testbat';
+  import Button from 'as-ui/button';
 
   export {
-    Testbat
+    Button
   }
 }

@@ -20,9 +20,27 @@ module.exports = merge(webpackBaseConfig, {
   },
   devtool: '#cheap-eval-source-map',
   module: {
-    rules: cssLoaderConfig.styleLoaders({
-      sourceMap: config.dev.cssSourceMap
-    })
+    rules: [
+      ...cssLoaderConfig.styleLoaders({
+        sourceMap: config.dev.cssSourceMap
+      }),
+      {
+        test: /\.md$/,
+        use: [
+          {
+            loader: 'vue-loader',
+            options: {
+              compilerOptions: {
+                preserveWhitespace: false
+              }
+            }
+          },
+          {
+            loader: path.resolve(__dirname, './md-loader/index.js')
+          }
+        ]
+      }
+    ]
   },
   plugins: [
     new webpack.DefinePlugin({

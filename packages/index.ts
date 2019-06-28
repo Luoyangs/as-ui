@@ -1,1 +1,1 @@
-export { default as Testbat } from './testbat';
+export { default as Button } from './button';
