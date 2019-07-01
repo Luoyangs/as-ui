@@ -3,7 +3,7 @@ const mdContainer = require('markdown-it-container')
 
 module.exports = md => {
   md.use(mdContainer, 'demo', {
-    // function to validate tail after opening marker, should return true on success
+    // 当我们写:::demo :::这样的语法时才会进入自定义渲染方法
     validate(params) {
       // 表示检测以"::: demo"开始的都符合条件
       return params.trim().match(/^demo\s*(.*)$/)

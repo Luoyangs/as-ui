@@ -14,6 +14,7 @@
 import { Vue, Component } from 'vue-property-decorator';
 import CommonHeader from './common/common-header.vue';
 import CommonMenu from './common/common-menu.vue';
+import { getElementPosition } from '@src/utils';
 
 @Component({
   components: {
@@ -22,7 +23,29 @@ import CommonMenu from './common/common-menu.vue';
   }
 })
 export default class Index extends Vue {
+  private goAnchor() {
+    if (location.href.match(/#/g).length > 1) {
+      const anchor = location.href.match(/#[^#]+$/g);
+      if (!anchor) {
+        return;
+      }
 
+      const ele = document.querySelector(anchor[0]) as HTMLElement;
+      if (!ele) {
+        return;
+      }
+
+      const pos = getElementPosition(ele, { x: 0, y: 80 });
+      window.scrollTo(pos.x, pos.y);
+    }
+  }
+
+  private mounted() {
+    // 确保子组件render完成
+    this.$nextTick(() => {
+      this.goAnchor();
+    });
+  }
 }
 </script>
 

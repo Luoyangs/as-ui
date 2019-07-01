@@ -10,15 +10,6 @@ Vue.component(Button.name, Button);
 import CommonDemoBlock from './common/common-block.vue';
 Vue.component('demo-block', CommonDemoBlock);
 
-// import hljs from 'highlight.js';
-// import 'highlight.js/styles/monokai-sublime.css'; //样式文件
-// Vue.directive('highlight', function (el) {
-//   let blocks = el.querySelectorAll('pre code');
-//   blocks.forEach((block) => {
-//     hljs.highlightBlock(block);
-//   });
-// });
-
 Vue.config.devtools = true;
 
 const _ = new Vue({
