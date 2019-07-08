@@ -95,15 +95,15 @@ export default class CommonHeader extends Vue {
         border-bottom: 4px solid transparent;
         transition: all .3s ease-in;
         color: rgba($color: #ffffff, $alpha: .7);
+        cursor: pointer;
         &.active {
           color: #ffffff;
-          font-size: 1.2em;
+          font-size: 1.1em;
           border-bottom-color:#009688;
         }
         &:hover {
           color: #ffffff;
-          font-size: 1.2em;
-          cursor: pointer;
+          font-size: 1.1em;
         }
       }
     }

@@ -14,7 +14,8 @@ chain
       level: 2,
       slugify,
       permalink: true,
-      permalinkBefore: true
+      permalinkBefore: false,
+      permalinkSymbol: '#'
     }
   ]).end()
   // 添加内容

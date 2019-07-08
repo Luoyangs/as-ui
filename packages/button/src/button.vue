@@ -1,5 +1,5 @@
 <template>
-  <div class="asui-index" @click="$emit('click')">
+  <div class="as-button" @click="$emit('click')">
     this is a test component
   </div>
 </template>

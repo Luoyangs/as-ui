@@ -26,6 +26,8 @@ export default class CommonMenu extends Vue {
 
 <style lang="scss" scoped>
 .common-menu {
+  background: #ffffff;
+  padding: 16px 12px;
   margin-right: 16px;
   .menu-scroller {
     overflow-y: auto;

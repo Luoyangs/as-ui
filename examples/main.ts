@@ -7,6 +7,7 @@ import App from './App.vue';
 import { Button } from 'as-ui';
 Vue.component(Button.name, Button);
 
+import 'highlight.js/styles/a11y-light.css';
 import CommonDemoBlock from './common/common-block.vue';
 Vue.component('demo-block', CommonDemoBlock);
 

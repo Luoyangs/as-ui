@@ -1,27 +1,21 @@
 <template>
-  <div class="common-demo-block"
-    @mouseenter="hovering = true"
-    @mouseleave="hovering = false">
+  <div class="common-demo-block">
     <div class="source">
       <slot name="source"></slot>
     </div>
     <div class="meta" :style="{ height: isExpanded ? 0: 'auto' }">
-      <div class="desc">
+      <div class="desc" v-if="$slots.default">
         <slot></slot>
       </div>
       <div class="highlight">
         <slot name="highlight"></slot>
       </div>
     </div>
-    <div
+    <div ref="control"
       class="demo-block-control"
-      ref="control"
       @click="isExpanded = !isExpanded">
-      <transition name="arrow-slide">
-        <span v-if="!hovering">...</span>
-      </transition>
       <transition name="text-slide">
-        <span v-show="hovering">{{ isExpanded ? '显示代码' : '隐藏代码' }}</span>
+        <span>{{ isExpanded ? '显示代码' : '隐藏代码' }}</span>
       </transition>
     </div>
   </div>
@@ -33,7 +27,6 @@ import { Vue, Component, Watch } from 'vue-property-decorator';
 @Component
 export default class CommonDemoBlock extends Vue {
   private isExpanded: boolean = true;
-  private hovering: boolean = false;
 
   private renderAnchorHref() {
     const anchors = document.querySelectorAll('h2 a, h3 a, h4 a, h5 a');
@@ -108,9 +101,12 @@ export default class CommonDemoBlock extends Vue {
     }
     code.hljs {
       margin: 0;
+      padding: 18px 24px;
       border: none;
       max-height: none;
       border-radius: 0;
+      display: block;
+      overflow-x: auto;
       &::before {
         content: none;
       }
@@ -150,10 +146,10 @@ export default class CommonDemoBlock extends Vue {
       display: inline-block;
     }
     &:hover {
-      color: #409eff;
+      color: #009688;
       background-color: #f9fafc;
     }
-    & .text-slide-enter, & .text-slide-leave-active {
+    &.text-slide-leave-active {
       opacity: 0;
       transform: translateX(10px);
     }
