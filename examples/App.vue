@@ -1,10 +1,10 @@
 <template>
   <div class="asui-index">
-    <common-header></common-header>
+    <common-header @click="handleRouteChange"/>
     <div class="asui-main">
-      <common-menu></common-menu>
-      <router-view></router-view>
-      <common-navs v-if="navs && navs.length" :navs="navs"></common-navs>
+      <common-menu :routes="routes"/>
+      <router-view/>
+      <common-navs :navs="navs"/>
     </div>
   </div>
 </template>
@@ -15,6 +15,12 @@ import CommonHeader from './common/common-header.vue';
 import CommonMenu from './common/common-menu.vue';
 import CommonNavs, { NavType } from './common/common-navs.vue';
 import { getElementPosition } from '@src/utils';
+import { blogRouterConfig, componentsRouterConfig } from './router';
+import { RouteConfig } from 'vue-router';
+const routerMap: { [key: string]: RouteConfig[] } = {
+  ui: componentsRouterConfig,
+  blog: blogRouterConfig
+};
 
 @Component({
   components: {
@@ -25,9 +31,10 @@ import { getElementPosition } from '@src/utils';
 })
 export default class Index extends Vue {
   private navs: NavType[] = [];
+  private routes: RouteConfig[] = [];
 
   private loadNavList(navRoot: Element) {
-    const children = (navRoot && navRoot.children || []) as HTMLCollection;
+    const children = (navRoot ? navRoot.children : []) as HTMLCollection;
     const list: NavType[] = [];
 
     for (let i = 0, len = children.length; i < len; i++) {
@@ -70,9 +77,9 @@ export default class Index extends Vue {
         }
 
         const pos = getElementPosition(ele, { x: 0, y: 80 });
-        const winTop = window.pageYOffset
-          || document.documentElement.scrollTop
-          || document.body.scrollTop;
+        const winTop = window.pageYOffset ||
+          document.documentElement.scrollTop ||
+          document.body.scrollTop;
 
         if (pos.y > winTop - 10 && pos.y < winTop + 10) {
           const href = window.location.href;
@@ -88,7 +95,24 @@ export default class Index extends Vue {
     }
   }
 
+  private handleRouteChange(type: string) {
+    if (type in routerMap) {
+      const routes = routerMap[type];
+      this.routes = routes;
+      this.navs = [];
+
+      // set default route path
+      let defaultPath = routes[0].path;
+      if (routes[0].children) {
+        defaultPath = routes[0].path + '/' + routes[0].children[0].path;
+      }
+      this.$router.push(defaultPath);
+    }
+  }
+
   private mounted() {
+    // 初始化操作
+    this.handleRouteChange('ui');
     window.addEventListener('scroll', this.handleScroll, false);
   }
 
@@ -127,6 +151,7 @@ export default class Index extends Vue {
 a {
   color: #009688;
   text-decoration: none;
+  cursor: pointer;
 }
 
 code {

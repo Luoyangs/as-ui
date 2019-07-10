@@ -2,25 +2,27 @@
   <div class="common-menu">
     <div class="menu-scroller">
       <ul class="menu-list">
-        <li class="menu-item"
-          :class="{'active': $route.name === item.name }"
+        <menu-item
+          :item="item"
           v-for="(item, index) in routes"
-          :key="index"
-          @click="$router.push(item.path)">
-          {{ item.name }}
-        </li>
+          :key="index"/>
       </ul>
     </div>
   </div>
 </template>
 
 <script lang="ts">
-import { Vue, Component } from 'vue-property-decorator';
-import { componentsRouterConfig } from '../router';
+import { Vue, Component, Prop } from 'vue-property-decorator';
+import { RouteConfig } from 'vue-router';
+import MenuItem from './menu-item.vue';
 
-@Component
+@Component({
+  components: {
+    MenuItem
+  }
+})
 export default class CommonMenu extends Vue {
-  private routes = componentsRouterConfig.filter(item => !!item.name);
+  @Prop() private routes: RouteConfig[];
 }
 </script>
 
@@ -39,18 +41,6 @@ export default class CommonMenu extends Vue {
   .menu-list {
     margin: 0;
     padding: 0;
-  }
-  .menu-item {
-    cursor: pointer;
-    line-height: 40px;
-    padding-left: 16px;
-    &.active {
-      background: mix(#009688,#ffffff, 10%);
-      color: #009688;
-    }
-    &:hover:not(.active) {
-      color: #009688;
-    }
   }
 }
 </style>

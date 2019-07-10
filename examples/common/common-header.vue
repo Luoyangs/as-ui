@@ -7,7 +7,12 @@
       </div>
       <div class="header-menu">
         <ul class="menu-list">
-          <li v-for="(item, index) in menu" :class="{'active': active === item.label}" :key="index" @click="goLink(item)">{{item.label}}</li>
+          <li v-for="(item, index) in menu"
+            :class="{'active': active === item.label}"
+            :key="index"
+            @click="handleClick(item)">
+            {{item.label}}
+          </li>
         </ul>
       </div>
     </div>
@@ -28,21 +33,21 @@ export default class CommonHeader extends Vue {
   private menu: MenuType[] = [
     {
       label: 'UI库',
-      link: ''
+      link: 'ui'
     },
-    {
-      label: '资源',
-      link: '/source'
-    },
+    // {
+    //   label: '资源',
+    //   link: 'source'
+    // },
     {
       label: '博客',
-      link: '/blog'
+      link: 'blog'
     }
   ];
 
-  private goLink(item: MenuType) {
+  private handleClick(item: MenuType) {
     this.active = item.label;
-    this.$router.push(item.link);
+    this.$emit('click', item.link);
   }
 }
 </script>
@@ -59,6 +64,11 @@ export default class CommonHeader extends Vue {
   display: flex;
   z-index: 99;
   background: #393D49;
+  .container {
+    width: 100%;
+    padding-left: 230px;
+    padding-right: 188px;
+  }
   .header-logo {
     display: flex;
     align-items: center;
@@ -87,23 +97,21 @@ export default class CommonHeader extends Vue {
       overflow: auto;
       list-style: none;
       li {
-        line-height: 56px;
+        line-height: 60px;
         float: right;
-        margin-left: 12px;
-        padding: 0 12px;
+        padding: 0 20px;
         font-size: 14px;
-        border-bottom: 4px solid transparent;
         transition: all .3s ease-in;
         color: rgba($color: #ffffff, $alpha: .7);
         cursor: pointer;
         &.active {
-          color: #ffffff;
-          font-size: 1.1em;
-          border-bottom-color:#009688;
+          color: #009688;
+          font-size: 1.02em;
+          // background: #009688;
         }
         &:hover {
-          color: #ffffff;
-          font-size: 1.1em;
+          color: #009688;
+          font-size: 1.02em;
         }
       }
     }

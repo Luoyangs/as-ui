@@ -4,7 +4,6 @@ const {
 const markdown = require('./markdown')
 
 module.exports = (source) => {
-  console.log('source', source);
   const content = markdown.render(source)
 
   const startTag = '<!--as-ui-demo:'

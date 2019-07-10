@@ -7,7 +7,6 @@ const config = require('./config')
 const webpackDevConfig = require('./webpack.dev.config')
 
 const port = config.dev.port
-const autoOpenBrowser = config.dev.autoOpenBrowser
 const proxyTable = config.dev.proxyTable || {}
 
 const app = express()

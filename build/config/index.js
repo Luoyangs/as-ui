@@ -8,7 +8,7 @@ module.exports = {
     bundleAnalyzerReport: process.env.npm_config_report || process.argv.includes('--report')
   },
   dev: {
-    port: 8000,
+    port: 8001,
     autoOpenBrowser: false,
     assetsSubDirectory: 'static',
     assetsPublicPath: '/',

@@ -1,5 +1,5 @@
 <template>
-  <div class="common-navs">
+  <div class="common-navs" v-if="navs && navs.length">
     <div class="nav-title">目录标题</div>
     <ul class="nav-list" @click="handleAnchor">
       <li class="nav-item"
